@@ -21,7 +21,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function(){
-    Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
-    Route::get('/', [DashboardController::class, 'dashboard']);
+Route::group(['prefix'=>'admin'], function(){
+    Route::get('/', [AdminController::class, 'login']);
+    Route::post('/', [AdminController::class, 'authenticate']);
+    Route::get('logout', [AdminController::class, 'logout']);
+    
+    Route::group(['middleware'=>['checkadmin']], function(){
+        Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+    });
 });
