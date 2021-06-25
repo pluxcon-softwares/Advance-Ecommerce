@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
-use Session;
-use Hash;
-use Image;
-use Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 use App\Models\Admin;
 
@@ -18,11 +19,13 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        Session::put('page', 'Dashboard');
         return view('admin.dashboard');
     }
 
     public function updateAdminPasswordForm()
     {
+        Session::put('page', 'Settings');
         return view('admin.update-admin-password');
     }
 
@@ -35,10 +38,10 @@ class DashboardController extends Controller
         $messages = [
             'current_password.required' => 'Current admin password is required',
             'new_password.required' =>  'New admin password required',
-            'new_password.confirmed'=> 'New and confirm admin password does not match' 
+            'new_password.confirmed'=> 'New and confirm admin password does not match'
         ];
         $request->validate($rules, $messages);
-        
+
         if( Hash::check($request['current_password'], Auth::guard('admin')->user()->password) )
         {
             Admin::where('email', Auth::guard('admin')->user()->email)
@@ -63,6 +66,8 @@ class DashboardController extends Controller
 
     public function updateAdminDetails(Request $request)
     {
+        Session::put('page', 'Settings');
+
         if($request->isMethod('post'))
         {
             $rules = [

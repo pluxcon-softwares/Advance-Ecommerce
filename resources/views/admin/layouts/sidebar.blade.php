@@ -44,15 +44,19 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+         <!-- Dashboard Section -->
           <li class="nav-item">
-            <a href="{{ url('admin/dashboard') }}" class="nav-link">
+            <a href="{{ url('admin/dashboard') }}" class="nav-link {{ (Session::get('page') == 'Dashboard') ? 'active' : '' }} ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               Dashboard
             </a>
           </li>
+          <!-- /.Dashboard Section -->
 
+          <!-- Settings Section -->
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link {{ (Session::get('page') == 'Settings') ? 'active' : '' }}">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Settings
@@ -75,7 +79,42 @@
                 </li>
               </ul>
           </li>
-         
+          <!-- /. Settings Sections -->
+
+          <!-- Catalog Section -->
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ (Session::get('page') == 'Catalog') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Catalog
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    Product
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ url('admin/sections') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    Section
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/update-admin-details') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      Category
+                    </a>
+                </li>
+              </ul>
+          </li>
+          <!-- /. Catalog Section -->
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

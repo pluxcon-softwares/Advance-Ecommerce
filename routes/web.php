@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AdminController;
-use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Admin\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +32,9 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('update-admin-password', [DashboardController::class, 'updateAdminPassword']);
         Route::post('check-current-password', [DashboardController::class, 'checkCurrentPassword']);
         Route::match(['get', 'post'], 'update-admin-details', [DashboardController::class, 'updateAdminDetails']);
+
+        //Section Route
+        Route::get('sections', [SectionController::class, 'sections']);
+        Route::post('section/change-section-status', [SectionController::class,'changeSectionStatus']);
     });
 });
