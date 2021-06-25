@@ -24,9 +24,13 @@ Route::get('/', function () {
 Route::group(['prefix'=>'admin'], function(){
     Route::get('/', [AdminController::class, 'login']);
     Route::post('/', [AdminController::class, 'authenticate']);
-    Route::get('logout', [AdminController::class, 'logout']);
-    
+
     Route::group(['middleware'=>['checkadmin']], function(){
+        Route::get('logout', [AdminController::class, 'logout']);
         Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+        Route::get('update-admin-password', [DashboardController::class, 'updateAdminPasswordForm']);
+        Route::post('update-admin-password', [DashboardController::class, 'updateAdminPassword']);
+        Route::post('check-current-password', [DashboardController::class, 'checkCurrentPassword']);
+        Route::match(['get', 'post'], 'update-admin-details', [DashboardController::class, 'updateAdminDetails']);
     });
 });
