@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
@@ -36,5 +37,13 @@ Route::group(['prefix'=>'admin'], function(){
         //Section Route
         Route::get('sections', [SectionController::class, 'sections']);
         Route::post('section/change-section-status', [SectionController::class,'changeSectionStatus']);
+
+        //Category Route
+        Route::get('categories', [CategoryController::class, 'categories']);
+        Route::post('category/change-category-status', [CategoryController::class, 'changeSectionStatus']);
+        Route::match(['get','post'],'category/add', [CategoryController::class, 'addCategory']);
+        Route::post('fetch/section/categories', [CategoryController::class, 'fetchSectionCategories']);
+        Route::match(['get', 'post'], 'category/update/{id?}', [CategoryController::class, 'updateCategory']);
+        Route::post('category/delete', [CategoryController::class, 'deleteCategory']);
     });
 });

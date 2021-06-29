@@ -23,7 +23,7 @@
           <img src=" {{ $profileImage }} " class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
+          <span class="d-block" style="color:#fff;">{{ Auth::guard('admin')->user()->name }}</span>
         </div>
       </div>
 
@@ -86,7 +86,7 @@
             <a href="#" class="nav-link {{ (Session::get('page') == 'Catalog') ? 'active' : '' }}">
               <i class="nav-icon fas fa-box"></i>
               <p>
-                Catalog
+                Catalogues
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -106,7 +106,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('admin/update-admin-details') }}" class="nav-link">
+                    <a href="{{ url('admin/categories') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       Category
                     </a>
