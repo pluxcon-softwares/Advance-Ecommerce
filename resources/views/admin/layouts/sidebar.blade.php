@@ -91,12 +91,6 @@
               </p>
             </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    Product
-                  </a>
-                </li>
 
                 <li class="nav-item">
                   <a href="{{ url('admin/sections') }}" class="nav-link">
@@ -111,6 +105,14 @@
                       Category
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/products') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      Product
+                    </a>
+                </li>
+
               </ul>
           </li>
           <!-- /. Catalog Section -->

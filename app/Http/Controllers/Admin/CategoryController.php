@@ -43,7 +43,7 @@ class CategoryController extends Controller
         if($request->isMethod('post'))
         {
             $rules = [
-                'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'category_name' => 'required', //regex:/^[\pL\s\-]+$/u //AlphaNumeric regex:/^[\w-]*$/'
                 'category_image' =>  'image|mimes:jpg,jpeg,png,gif|max:2048|sometimes',
                 'url'           =>  'required',
                 'section_id'    =>  'required|numeric',
@@ -121,7 +121,7 @@ class CategoryController extends Controller
         {
             //return $request->all();
             $rules = [
-                'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'category_name' => 'required', //regex:/^[\pL\s\-]+$/u
                 'category_image' =>  'image|mimes:jpg,jpeg,png,gif|max:2048|sometimes',
                 'url'           =>  'required',
                 'section_id'    =>  'required|numeric',

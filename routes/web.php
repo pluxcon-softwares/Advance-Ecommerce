@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Admin\SectionController;
 
@@ -37,6 +38,7 @@ Route::group(['prefix'=>'admin'], function(){
         //Section Route
         Route::get('sections', [SectionController::class, 'sections']);
         Route::post('section/change-section-status', [SectionController::class,'changeSectionStatus']);
+        Route::match(['get', 'post'], '/section/add', [SectionController::class, 'addSection']);
 
         //Category Route
         Route::get('categories', [CategoryController::class, 'categories']);
@@ -45,5 +47,13 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('fetch/section/categories', [CategoryController::class, 'fetchSectionCategories']);
         Route::match(['get', 'post'], 'category/update/{id?}', [CategoryController::class, 'updateCategory']);
         Route::post('category/delete', [CategoryController::class, 'deleteCategory']);
+
+        // Product Route
+        Route::get('products', [ProductController::class, 'products']);
+        Route::post('product/view', [ProductController::class, 'viewProduct']);
+        Route::post('product/change-product-status', [ProductController::class, 'changeProductStatus']);
+        Route::match(['get', 'post'],'product/add', [ProductController::class, 'addProduct']);
+        Route::match(['get', 'post'],'product/update/{id?}', [ProductController::class, 'updateProduct']);
+        Route::post('product/delete', [ProductController::class, 'deleteProduct']);
     });
 });

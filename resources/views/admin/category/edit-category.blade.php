@@ -120,16 +120,17 @@
 
     <script src="{{ asset('js/admin/category.js') }}"></script>
 
-    @if (session('flash_success'))
-    <script>
-        $(function(){
-            swal.fire({
-                title: 'Success!',
-                text: "{{session('flash_success')}}",
-                icon: 'success'
+    @if (Session::has('flash_success'))
+        <script>
+            $(function(){
+                swal.fire({
+                    title: 'Success!',
+                    text: "{{ Session::get('flash_success') }}",
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             });
-        });
-    </script>
+        </script>
     @endif
-
 @endsection

@@ -24,7 +24,7 @@
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Section</h3>
-                    <button class="btn btn-sm btn-danger fa-pull-right"><i class="fas fa-plus"></i> Add Section</button>
+                    <a href="{{ url('admin/section/add') }}" class="btn btn-sm btn-danger fa-pull-right"><i class="fas fa-plus"></i> Add Section</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-hover" id="sectionsTbl">
