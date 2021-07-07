@@ -55,5 +55,12 @@ Route::group(['prefix'=>'admin'], function(){
         Route::match(['get', 'post'],'product/add', [ProductController::class, 'addProduct']);
         Route::match(['get', 'post'],'product/update/{id?}', [ProductController::class, 'updateProduct']);
         Route::post('product/delete', [ProductController::class, 'deleteProduct']);
+
+        // Product Attributes
+        Route::match(['get', 'post'], '/product/attributes/{id}', [ProductController::class, 'productAttributes']);
+        Route::post('product/attributes/update/{id}', [ProductController::class, 'updateProductAttributes']);
+        Route::post('product/attributes/delete/{id}', [ProductController::class, 'deleteProductAttributes']);
+        Route::post('product/attribute/change-attribute-status/', [ProductController::class, 'changeProductAttributeStatus']);
+        Route::post('product/attribute/delete', [ProductController::class, 'deleteProductAttributes']);
     });
 });

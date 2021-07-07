@@ -31,13 +31,13 @@ $(function(){
             success:function(res){
                 if(res['status'] == 1)
                 {
-                    categoryEl.text('Active');
+                    categoryEl.html(`<i class="fas fa-toggle-on"></i>`);
                     categoryEl.attr('data-category_status', 1);
                 }
 
                 if(res['status'] == 0)
                 {
-                    categoryEl.text('Inactive');
+                    categoryEl.html(`<i class="fas fa-toggle-off"></i>`);
                     categoryEl.attr('data-category_status', 0);
                 }
             }

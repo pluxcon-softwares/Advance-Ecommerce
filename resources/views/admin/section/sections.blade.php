@@ -43,12 +43,12 @@
                                     <td>{{ $section->name }}</td>
                                     <td>
                                         @if($section->status == 1)
-                                        <a href="#" class="section_status" data-section_status="{{ $section->status }}" data-section_id="{{ $section->id }}">Active
-                                            <span class="spinner spinner-border spinner-border-sm" style="display: none"></span>
+                                        <a href="#" class="section_status" data-section_status="{{ $section->status }}" data-section_id="{{ $section->id }}">
+                                            <i class="fas fa-toggle-on"></i>
                                         </a>
                                         @else
-                                        <a href="#" class="section_status" data-section_status="{{ $section->status }}" data-section_id="{{ $section->id }}">Inactive
-                                            <span class="spinner spinner-border spinner-border-sm" style="display: none"></span>
+                                        <a href="#" class="section_status" data-section_status="{{ $section->status }}" data-section_id="{{ $section->id }}">
+                                            <i class="fas fa-toggle-off"></i>
                                         </a>
                                         @endif
                                     </td>

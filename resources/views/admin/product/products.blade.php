@@ -51,17 +51,18 @@
                                     <td>{{ $product->section->name }}</td>
                                     <td>
                                         @if($product->status == 1)
-                                        <a href="#" class="product_status" data-product_status="{{ $product->status }}" data-product_id="{{ $product->id }}">Active
-                                            <span class="spinner spinner-border spinner-border-sm" style="display: none"></span>
+                                        <a href="#" class="product_status" data-product_status="{{ $product->status }}" data-product_id="{{ $product->id }}">
+                                            <i class="fas fa-toggle-on"></i>
                                         </a>
                                         @else
-                                        <a href="#" class="product_status" data-product_status="{{ $product->status }}" data-product_id="{{ $product->id }}">Inactive
-                                            <span class="spinner spinner-border spinner-border-sm" style="display: none"></span>
+                                        <a href="#" class="product_status" data-product_status="{{ $product->status }}" data-product_id="{{ $product->id }}">
+                                            <i class="fas fa-toggle-off"></i>
                                         </a>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="btn-group">
+                                            <a href="{{ url('admin/product/attributes/'.$product->id) }}" class="btn btn-default btn-xs"><i class="fas fa-plus"></i> Add Attributes</a>
                                             <a href="#" class="btn btn-info btn-xs view_product" data-product_id="{{ $product->id }}"><i class="fas fa-file"></i> View</a>
                                             <a href="{{ url('admin/product/update/'.$product->id) }}" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i> Edit</a>
                                             <a href="javascript:void(0)" class="btn btn-danger btn-xs delete_product" data-product_id="{{ $product->id }}"><i class="fas fa-trash"></i> Delete</a>

@@ -55,12 +55,12 @@
                                     <td>{{ $category['url'] }}</td>
                                     <td>
                                         @if($category->status == 1)
-                                        <a href="#" class="category_status" data-category_status="{{ $category->status }}" data-category_id="{{ $category->id }}">Active
-                                            <span class="spinner spinner-border spinner-border-sm" style="display: none"></span>
+                                        <a href="#" class="category_status" data-category_status="{{ $category->status }}" data-category_id="{{ $category->id }}">
+                                            <i class="fas fa-toggle-on"></i>
                                         </a>
                                         @else
-                                        <a href="#" class="category_status" data-category_status="{{ $category->status }}" data-category_id="{{ $category->id }}">Inactive
-                                            <span class="spinner spinner-border spinner-border-sm" style="display: none"></span>
+                                        <a href="#" class="category_status" data-category_status="{{ $category->status }}" data-category_id="{{ $category->id }}">
+                                            <i class="fas fa-toggle-off"></i>
                                         </a>
                                         @endif
                                     </td>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
+use App\Models\ProductAttribute;
 
 class ProductController extends Controller
 {
@@ -286,5 +287,74 @@ class ProductController extends Controller
         }
 
         return response()->json(['success' =>  'Product has been deleted successfully!']);
+    }
+
+
+    // ============================= PRODUCT ATTRIBUTES FUNCTIONALITIES =========================
+
+    public function productAttributes(Request $request, $id = null)
+    {
+        Session::put('page', 'Catalogues');
+        if($request->isMethod('get'))
+        {
+            $product = Product::select('id', 'product_name', 'product_code', 'product_main_image')
+            ->with('attributes')->find($id);
+            return view('admin.product.product-attributes')->with(['product'=>$product]);
+        }
+
+        if($request->isMethod('post'))
+        {
+            // echo "<pre>"; print_r($request->all()); die;
+            $data = $request->all();
+            foreach($data['size'] as $key => $value)
+            {
+                $attribute = new ProductAttribute;
+                    $attribute->product_id = $id;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->sku = $data['sku'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->status = 1;
+                    $attribute->save();
+            }
+            Session::flash('flash_success', 'Product attribute(s) has been added successfully!');
+            return redirect()->back();
+        }
+    }
+
+    public function updateProductAttributes(Request $request, $id = null)
+    {
+        // echo "<pre>"; print_r($request->all()); die;
+        $data = $request->all();
+        foreach($data['price'] as $key => $value)
+        {
+            ProductAttribute::where('id', $data['attribute_id'][$key])
+            ->update([
+                'price' => $data['price'][$key],
+                'stock' => $data['stock'][$key]
+            ]);
+        }
+        Session::flash('flash_success', 'Product attribute has been updated succesfully!');
+        return redirect()->back();
+    }
+
+    public function changeProductAttributeStatus(Request $request)
+    {
+        if($request['product_attribute_status'] == 1)
+        {
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        ProductAttribute::find($request['attribute_id'])->update(['status' => $status]);
+
+        return response()->json(['status' => $status]);
+    }
+
+    public function deleteProductAttributes(Request $request)
+    {
+        $id = (int) $request->product_attribute_id;
+        ProductAttribute::find($id)->delete();
+        return response()->json(['success' => 'Product attribute has been deleted!']);
     }
 }
