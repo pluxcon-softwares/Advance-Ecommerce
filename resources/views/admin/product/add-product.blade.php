@@ -18,7 +18,7 @@
                                     <div class="form-group">
                                         <label for="">Select Category</label>
                                         <select name="category_id" id="category_id" class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}">
-                                            <option value="">Select Section</option>
+                                            <option value="">Select Category</option>
                                             @foreach ($categories as $section)
                                                 <optgroup label="{{ $section->name }} Section"></optgroup>
                                                 @foreach ($section->categories as $category)
@@ -78,6 +78,21 @@
                             <!-- /. Left Form Elements -->
 
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="">Product Brand</label>
+                                        <select name="brand_id" id="brand_id" class="form-control {{ $errors->has('brand_id') ? 'is-invalid' : '' }}">
+                                            <option value="">Select Brand</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('brand_id'))
+                                        <span style="display: block; font-size:12px; color:red;">{{ $errors->first('brand_id') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="">Product Code</label>
                                     <input type="text" name="product_code" value="{{ old('product_code')}}" id="product_code" class="form-control {{ $errors->has('product_code') ? 'is-invalid' : '' }}" placeholder="Enter Product Code">

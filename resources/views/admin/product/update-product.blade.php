@@ -7,7 +7,7 @@
                 <form action="{{ url('admin/product/update/'.$product->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card card-header">
-                        <h3 class="card-title">Update Product</h3>
+                        <div class="card-title">Update Product</div>
                     </div>
 
                     <div class="card-body">
@@ -78,6 +78,21 @@
                             <!-- /. Left Form Elements -->
 
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="">Product Brand</label>
+                                        <select name="brand_id" id="brand_id" class="form-control {{ $errors->has('brand_id') ? 'is-invalid' : '' }}">
+                                            <option value="">Select Brand</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}" @if(isset($product->brand->id) && ($brand->id == $product->brand->id)) selected @endif>{{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('brand_id'))
+                                        <span style="display: block; font-size:12px; color:red;">{{ $errors->first('brand_id') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="">Product Code</label>
                                     <input type="text" name="product_code" value="{{ $product->product_code }}" id="product_code" class="form-control {{ $errors->has('product_code') ? 'is-invalid' : '' }}" placeholder="Enter Product Code">
