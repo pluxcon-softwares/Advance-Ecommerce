@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,12 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('sections', [SectionController::class, 'sections']);
         Route::post('section/change-section-status', [SectionController::class,'changeSectionStatus']);
         Route::match(['get', 'post'], '/section/add', [SectionController::class, 'addSection']);
+
+        // Brand Routes
+        Route::get('brands', [BrandController::class, 'brands']);
+        Route::match(['get', 'post'],'brand/add', [BrandController::class, 'addBrand']);
+        Route::match(['get', 'post'], 'brand/update/{id}', [BrandController::class, 'updateBrand']);
+        Route::post('brand/delete', [BrandController::class, 'deleteBrand']);
 
         //Category Route
         Route::get('categories', [CategoryController::class, 'categories']);

@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['section_id', 'category_id', 'product_name', 'product_code',
+    protected $fillable = ['section_id', 'brand_id', 'category_id', 'product_name', 'product_code',
     'product_price', 'product_discount', 'product_weight', 'product_video', 'product_main_image',
     'product_description', 'meta_title', 'meta_description', 'meta_keywords', 'is_featured', 'status'];
 
@@ -21,6 +21,11 @@ class Product extends Model
     public function section()
     {
         return $this->belongsTo(Section::class, 'section_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function attributes()

@@ -83,7 +83,7 @@
 
           <!-- Catalog Section -->
           <li class="nav-item">
-            <a href="#" class="nav-link {{ (Session::get('page') == 'Catalog') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ (Session::get('page') == 'Catalogues') ? 'active' : '' }}">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Catalogues
@@ -98,6 +98,13 @@
                     Section
                   </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/brands') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      Brand
+                    </a>
+                  </li>
 
                 <li class="nav-item">
                     <a href="{{ url('admin/categories') }}" class="nav-link">
