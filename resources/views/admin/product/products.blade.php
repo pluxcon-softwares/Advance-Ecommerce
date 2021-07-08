@@ -61,11 +61,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <div class="btn-group">
-                                            <a href="{{ url('admin/product/attributes/'.$product->id) }}" class="btn btn-default btn-xs"><i class="fas fa-plus"></i> Add Attributes</a>
-                                            <a href="#" class="btn btn-info btn-xs view_product" data-product_id="{{ $product->id }}"><i class="fas fa-file"></i> View</a>
-                                            <a href="{{ url('admin/product/update/'.$product->id) }}" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i> Edit</a>
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-xs delete_product" data-product_id="{{ $product->id }}"><i class="fas fa-trash"></i> Delete</a>
+                                        <div class="">
+                                            <a href="{{ url('admin/product/attributes/'.$product->id) }}" class="" title="View/Add Attributes"><i class="fas fa-plus"></i></a>
+                                            <a href="{{ url('admin/product/images/'.$product->id) }}" class="" title="View/Add Images"><i class="fas fa-plus-circle"></i></a>
+                                            <a href="#" class="view_product" data-product_id="{{ $product->id }}" title="View Details"><i class="fas fa-file"></i></a>
+                                            <a href="{{ url('admin/product/update/'.$product->id) }}" class="" title="Edit Product"><i class="fas fa-edit"></i></a>
+                                            <a href="javascript:void(0)" class="delete_product" data-product_id="{{ $product->id }}" title="Delete Product"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

@@ -123,7 +123,6 @@ $(function(){
     $("#productAttributesTbl").DataTable();
 
     // Change product attribute status
-    //Change section status
     $("#productAttributesTbl").on('click', '.product_attribute_status', function(e){
         e.preventDefault();
         //e.stopImmediatePropagation();
@@ -170,6 +169,72 @@ $(function(){
                     url: `/admin/product/attribute/delete`,
                     method: 'POST',
                     data: {product_attribute_id: product_attribute_id},
+                    success:function(res){
+                        if(res.success)
+                        {
+                            swal.fire({
+                                title: 'Success!',
+                                text: `${res.success}`,
+                                icon: 'success',
+                            }).then((result)=>{
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    // Initialize Product Images Datatable
+    $("#productImagesTbl").DataTable();
+
+    // Change product image status
+    $("#productImagesTbl").on('click', '.product_image_status', function(e){
+        e.preventDefault();
+        //e.stopImmediatePropagation();
+        var imageEl = $(this);
+        var image_id = imageEl.attr('data-image_id');
+        var product_image_status = imageEl.attr('data-product_image_status');
+        $.ajax({
+            url: '/admin/product/image/change-image-status',
+            method: 'POST',
+            data:{image_id: image_id, product_image_status: product_image_status},
+            success:function(res){
+                if(res['status'] == 1)
+                {
+                    imageEl.html(`<i class='fas fa-toggle-on'></i>`);
+                    imageEl.attr('data-product_image_status', 1);
+                }
+
+                if(res['status'] == 0)
+                {
+                    imageEl.html(`<i class='fas fa-toggle-off'></i>`);
+                    imageEl.attr('data-product_image_status', 0);
+                }
+            }
+        });
+    });
+
+    // Delete Product Images
+    $("#productImagesTbl").on('click', '.delete_product_image', function(){
+        var product_image_id = $(this).attr('data-image_id');
+        swal.fire({
+            title: 'Warning!',
+            text: 'Deleted product image cannot be reverted!',
+            icon: 'warning',
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result)=>{
+            if(result.isConfirmed)
+            {
+                $.ajax({
+                    url: `/admin/product/image/delete`,
+                    method: 'POST',
+                    data: {product_image_id: product_image_id},
                     success:function(res){
                         if(res.success)
                         {

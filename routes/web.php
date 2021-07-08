@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Admin\SectionController;
 
+// for testing purposely
+use App\Models\Section;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +25,17 @@ use App\Http\Controllers\Admin\SectionController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/test', function(){
+//     $sections = Section::with(['categories' => function($query){
+//         $query->with(['subcategories' => function($query2){
+//             $query2->where(['status' => 1]);
+//         }])
+//         ->where(['status' => 1, 'parent_id' => 0]);
+//     }])->where('status', 1)->get();
+//     $sections = json_decode(json_encode($sections));
+//     echo "<pre>"; print_r($sections); die;
+// });
 
 Route::group(['prefix'=>'admin'], function(){
     Route::get('/', [AdminController::class, 'login']);
@@ -69,5 +82,12 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('product/attributes/delete/{id}', [ProductController::class, 'deleteProductAttributes']);
         Route::post('product/attribute/change-attribute-status/', [ProductController::class, 'changeProductAttributeStatus']);
         Route::post('product/attribute/delete', [ProductController::class, 'deleteProductAttributes']);
+
+        // Product Images
+        Route::match(['get', 'post'], '/product/images/{id}', [ProductController::class, 'productImages']);
+        // Route::post('product/attributes/update/{id}', [ProductController::class, 'updateProductAttributes']);
+        // Route::post('product/image/delete/{id}', [ProductController::class, 'deleteProductAttributes']);
+        Route::post('product/image/change-image-status/', [ProductController::class, 'changeProductImageStatus']);
+        Route::post('product/image/delete', [ProductController::class, 'deleteProductImages']);
     });
 });

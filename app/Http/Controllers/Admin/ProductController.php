@@ -13,6 +13,7 @@ use App\Models\Section;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ProductAttribute;
+use App\Models\ProductImage;
 
 class ProductController extends Controller
 {
@@ -208,7 +209,7 @@ class ProductController extends Controller
                 $smallFilePath = storage_path('app/public/product_images/small/'.$filename);
 
                 //save large image
-                Image::make($request->file('product_main_image'))->resize(800, 800)
+                Image::make($request->file('product_main_image'))->resize(1040, 1200)
                 ->save($largeFilePath);
 
                 //Save medium image
@@ -367,5 +368,72 @@ class ProductController extends Controller
         $id = (int) $request->product_attribute_id;
         ProductAttribute::find($id)->delete();
         return response()->json(['success' => 'Product attribute has been deleted!']);
+    }
+
+    // ================================= PRODUCT IMAGE FUNCTIONALITY ==============================================
+    public function productImages(Request $request, $id=null)
+    {
+        Session::put('page', 'Catalogues');
+
+        if($request->isMethod('get'))
+        {
+            $product = Product::with('images')->select('id', 'product_name', 'product_code', 'product_main_image')
+            ->where('id', $id)->first();
+            //echo "<pre>"; print_r($product); die;
+            return view('admin.product.product-images', compact('product'));
+        }
+
+
+        if($request->isMethod('post'))
+        {
+            //echo "<pre>"; print_r($request->file('image')); die;
+            $request->validate([
+                'image'     =>  'required', //|mimes:jpg,jpeg,png|max:2048
+            ],[
+                'image.required' => 'Select image(s), image filesize cannot be over 2MB',
+                //'image.mimes'   =>  'Acceptable image type is jpeg,jpg,png'
+            ]);
+            if($request->hasFile('image'))
+            {
+               foreach($request->file('image') as $file)
+               {
+                   $filename = $id.'_'.uniqid().'_'.'.'.$file->getClientOriginalExtension();
+                   $filepath = storage_path('app/public/product_images/additional_images/'.$filename);
+                   Image::make($file)->resize(640, 640)->save($filepath);
+
+                   $image = new ProductImage;
+                   $image->product_id = $id;
+                   $image->image = (isset($filename)) ? $filename : '';
+                   $image->save();
+               }
+               Session::flash('flash_success', 'Product additional image(s) has been uploaded!');
+               return redirect()->back();
+            }
+        }
+    }
+
+    public function changeProductImageStatus(Request $request)
+    {
+        if($request['product_image_status'] == 1)
+        {
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        ProductImage::find($request['image_id'])->update(['status' => $status]);
+
+        return response()->json(['status' => $status]);
+    }
+
+    public function deleteProductImages(Request $request)
+    {
+        $id = (int) $request->product_image_id;
+        $product = ProductImage::find($id);
+        if(Storage::exists('public/product_images/additional_images/'.$product->image))
+        {
+            Storage::delete('public/product_images/additional_images/'.$product->image);
+        }
+        $product->delete();
+        return response()->json(['success' => 'Product image has been deleted!']);
     }
 }

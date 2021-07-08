@@ -149,6 +149,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary fa-pull-right">Update Product</button>
+                        <a href="{{ url('admin/products') }}" type="submit" class="btn btn-default"><< Back</a>
                     </div>
                 </form>
             </div>
