@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\Front\FrontProductController;
 
 // for testing purposely
 use App\Models\Section;
@@ -22,9 +24,7 @@ use App\Models\Section;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Route::get('/test', function(){
 //     $sections = Section::with(['categories' => function($query){
@@ -90,4 +90,9 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('product/image/change-image-status/', [ProductController::class, 'changeProductImageStatus']);
         Route::post('product/image/delete', [ProductController::class, 'deleteProductImages']);
     });
+});
+
+Route::group(['namespace' => 'Front'], function(){
+    Route::get('/', [FrontController::class, 'index']);
+    Route::get('/{url}', [FrontProductController::class, 'listing']);
 });

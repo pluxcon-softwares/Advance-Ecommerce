@@ -162,7 +162,7 @@ class CategoryController extends Controller
             $category->meta_title = $request['meta_title'];
             $category->meta_description = $request['meta_description'];
             $category->meta_keywords = $request['meta_keywords'];
-            $category->status = 1;
+            $category->status = $category->status;
             $category->save();
 
             Session::flash('flash_success', 'Category created successfully!');

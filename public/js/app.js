@@ -1901,7 +1901,10 @@ window.swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2
 
 __webpack_require__(/*! @fortawesome/fontawesome-free/js/fontawesome.min.js */ "./node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js");
 
-__webpack_require__(/*! admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js */ "./node_modules/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js");
+__webpack_require__(/*! admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js */ "./node_modules/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"); // require('../demo_themes/eshop/themes/js/jquery.lightbox-0.5.js');
+// require('../demo_themes/eshop/themes/js/front.min.js');
+// require('../demo_themes/eshop/themes/js/less.js');
+// require('../demo_themes/eshop/themes/js/google-code-prettify/prettify.js');
 
 /***/ }),
 
